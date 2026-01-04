@@ -1,0 +1,769 @@
+<!DOCTYPE html>
+<html data-color-mode="light" data-dark-theme="dark" data-light-theme="light" lang="zh-CN">
+<head>
+    <meta content="text/html; charset=utf-8" http-equiv="content-type" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link href='https://mirrors.sustech.edu.cn/cdnjs/ajax/libs/Primer/21.0.7/primer.css' rel='stylesheet' />
+    
+    <link rel="icon" href="https://github.githubassets.com/favicons/favicon.svg"><script>
+        let theme = localStorage.getItem("meek_theme") || "light";
+        document.documentElement.setAttribute("data-color-mode", theme);
+    </script>
+<meta name="description" content="# 前期调研
+
+### 套件选择：
+
+  平面：lily58,lily58pro,sofle keyboard（sofle相当于加了旋钮的lily58),[Ergodone](https://post.smzdm.com/p/487452/)(大号分体）, crone(没有数字区不适合打中文）,[Redox](https://botiostudio.com/redox-keyboard-split-ergo/)(大号分体）,Helix(纯平面）
+
+  曲面：dactyl manuform
+
+目标：便携，易用，能用上现有的材料.容易制作，开源，有丰富的案例,轴座为热插拔
+
+结论：[sofle v2](https://josefadamcik.github.io/SofleKeyboard/build_guide.html)(v1和v2的区别是v1支持矮轴）
+
+主要目标：复刻sofle v2
+
+次要目标：把旋钮改成摇杆,加入缓震材料
+
+主要工具：吸锡器，焊笔，放大镜
+
+前期补充资料：
+
+[Pro Micro & Fio V3 Hookup Guide - learn.sparkfun.com](https://learn.sparkfun.com/tutorials/pro-micro--fio-v3-hookup-guide)
+
+[Inverted silkscreen? · Issue #3 · josefadamcik/SofleKeyboard · GitHub](https://github.com/josefadamcik/SofleKeyboard/issues/3#issuecomment-683192038)
+
+## 物料清单
+
+[材料清单](https://www.wolai.com/wocobD2oxbodEEgXWohuAo)
+
+- [x] 凯华轴座58个
+- [x] pcb打板
+- [x] 定位板和底板
+- [x] **1N4148W** SOD123 package 58
+- [x] ssd1306 128*32 oled 2
+- [x] 音频端子 2
+- [x] 音频线
+- [x] 两脚轻触开关 2
+- [x] m2 6mm 铜柱 14个
+- [x] m2螺丝 28
+- [x] 防滑贴
+- [x] EC11编码器 2（最好是ec11e,不要是ec11k)
+- [x] 旋钮盖
+- [x] pro micro ATmega32U4
+- [x] 凯华轴座58个
+- [x] pcb打板5
+- [x] 定位板和底板2
+- [x] **1N4148W** SOD123 package 58
+- [x] ssd1306 128*32 oled 2
+- [x] 音频端子 2
+- [x] 音频线 1
+- [x] 两脚轻触开关 2
+- [x] m2 6mm 铜柱 14个
+- [x] m2螺丝 28
+- [x] 防滑贴 1
+- [x] EC11编码器 2（最好是ec11e,不要是ec11k)
+- [x] 旋钮盖 2
+- [x] pro micro ATmega32U4 2
+- [x] 收货确认
+
+
+
+## 固件和编程
+
+![](https://secure2.wostatic.cn/static/6FEDHJ3mYGW4QDc96MMdon/image.png?auth_key=1767516045-kBjiNdh8QZE8dg9A3PpCHz-0-7b712f1ba8de1d624c0da4f1bf0f91a1)
+
+[qmk教程](https://www.wolai.com/vAcvf8xEfaBSCkAAbtppwz)
+
+1. 确保qmk的环境设置好
+2. 不要连接trrs音频线
+3. 将一半的键盘连接到电脑上面,flash固件,使用reset按钮
+4. 另外一半的键盘也要如此
+5. 断开usb连接，将两个键盘用trrs连接
+6. 用usb线连接左边的键盘
+7. **Enjoy!!!**
+
+## 时间表
+
+**2021.11.23-24**
+
+周二或周三物料和工具到齐
+
+**2021.11.24-12.1**
+
+焊接预计时间为一到两天，刷入固件
+
+**ddl暂定12月1日**
+
+### 日志
+
+2021/11/26
+
+问题：只有单一的板子工作，另外一块板子电源亮，指示灯亮，但是无法工作，oled屏幕显示乱码
+
+[Split Keyboard (qmk.fm)](https://docs.qmk.fm/#/feature_split_keyboard?id=required-hardware)
+
+![](https://secure2.wostatic.cn/static/bwYTwykGUCscfvqLQ2Vb4j/image.png?auth_key=1767516045-tyjAbaKDEMhQ7y3KEf4UJp-0-ac6813d9c76d4035e2ee847343444f1a)
+
+![](https://secure2.wostatic.cn/static/szAqURkx5pQRen7EHb3wi9/image.png?auth_key=1767516045-kEqKuUDGBHpDKqh5859kkm-0-8b4150d9cb37adc74652845cf613e77b)
+
+![](https://secure2.wostatic.cn/static/szAqURkx5pQRen7EHb3wi9/image.png?auth_key=1767516045-bVxsgk73tQrxDjc5Fw6f5m-0-8ced5b803c6282cf1b49aeaf3179a251)
+
+`avrdude-split-left`/`:avrdude-split-right`
+
+![](https://secure2.wostatic.cn/static/gt7p39ZenLsEiB6bch6ZDg/image.png?auth_key=1767516045-fN3zdtvwzPkf3ah3vvK1x1-0-1787d3ffbe9bdfd3a3d5ce66c7ee491f)
+
+2021.11.28
+
+严重大问题，两个板子无法通信，已知接线没有问题，单独拿杜邦线连接的时候也没用😩
+
+迷之解决办法:把一块板子的vcc和另外一块板子的gnd互连。">
+<meta property="og:title" content="分体键盘diy">
+<meta property="og:description" content="# 前期调研
+
+### 套件选择：
+
+  平面：lily58,lily58pro,sofle keyboard（sofle相当于加了旋钮的lily58),[Ergodone](https://post.smzdm.com/p/487452/)(大号分体）, crone(没有数字区不适合打中文）,[Redox](https://botiostudio.com/redox-keyboard-split-ergo/)(大号分体）,Helix(纯平面）
+
+  曲面：dactyl manuform
+
+目标：便携，易用，能用上现有的材料.容易制作，开源，有丰富的案例,轴座为热插拔
+
+结论：[sofle v2](https://josefadamcik.github.io/SofleKeyboard/build_guide.html)(v1和v2的区别是v1支持矮轴）
+
+主要目标：复刻sofle v2
+
+次要目标：把旋钮改成摇杆,加入缓震材料
+
+主要工具：吸锡器，焊笔，放大镜
+
+前期补充资料：
+
+[Pro Micro & Fio V3 Hookup Guide - learn.sparkfun.com](https://learn.sparkfun.com/tutorials/pro-micro--fio-v3-hookup-guide)
+
+[Inverted silkscreen? · Issue #3 · josefadamcik/SofleKeyboard · GitHub](https://github.com/josefadamcik/SofleKeyboard/issues/3#issuecomment-683192038)
+
+## 物料清单
+
+[材料清单](https://www.wolai.com/wocobD2oxbodEEgXWohuAo)
+
+- [x] 凯华轴座58个
+- [x] pcb打板
+- [x] 定位板和底板
+- [x] **1N4148W** SOD123 package 58
+- [x] ssd1306 128*32 oled 2
+- [x] 音频端子 2
+- [x] 音频线
+- [x] 两脚轻触开关 2
+- [x] m2 6mm 铜柱 14个
+- [x] m2螺丝 28
+- [x] 防滑贴
+- [x] EC11编码器 2（最好是ec11e,不要是ec11k)
+- [x] 旋钮盖
+- [x] pro micro ATmega32U4
+- [x] 凯华轴座58个
+- [x] pcb打板5
+- [x] 定位板和底板2
+- [x] **1N4148W** SOD123 package 58
+- [x] ssd1306 128*32 oled 2
+- [x] 音频端子 2
+- [x] 音频线 1
+- [x] 两脚轻触开关 2
+- [x] m2 6mm 铜柱 14个
+- [x] m2螺丝 28
+- [x] 防滑贴 1
+- [x] EC11编码器 2（最好是ec11e,不要是ec11k)
+- [x] 旋钮盖 2
+- [x] pro micro ATmega32U4 2
+- [x] 收货确认
+
+
+
+## 固件和编程
+
+![](https://secure2.wostatic.cn/static/6FEDHJ3mYGW4QDc96MMdon/image.png?auth_key=1767516045-kBjiNdh8QZE8dg9A3PpCHz-0-7b712f1ba8de1d624c0da4f1bf0f91a1)
+
+[qmk教程](https://www.wolai.com/vAcvf8xEfaBSCkAAbtppwz)
+
+1. 确保qmk的环境设置好
+2. 不要连接trrs音频线
+3. 将一半的键盘连接到电脑上面,flash固件,使用reset按钮
+4. 另外一半的键盘也要如此
+5. 断开usb连接，将两个键盘用trrs连接
+6. 用usb线连接左边的键盘
+7. **Enjoy!!!**
+
+## 时间表
+
+**2021.11.23-24**
+
+周二或周三物料和工具到齐
+
+**2021.11.24-12.1**
+
+焊接预计时间为一到两天，刷入固件
+
+**ddl暂定12月1日**
+
+### 日志
+
+2021/11/26
+
+问题：只有单一的板子工作，另外一块板子电源亮，指示灯亮，但是无法工作，oled屏幕显示乱码
+
+[Split Keyboard (qmk.fm)](https://docs.qmk.fm/#/feature_split_keyboard?id=required-hardware)
+
+![](https://secure2.wostatic.cn/static/bwYTwykGUCscfvqLQ2Vb4j/image.png?auth_key=1767516045-tyjAbaKDEMhQ7y3KEf4UJp-0-ac6813d9c76d4035e2ee847343444f1a)
+
+![](https://secure2.wostatic.cn/static/szAqURkx5pQRen7EHb3wi9/image.png?auth_key=1767516045-kEqKuUDGBHpDKqh5859kkm-0-8b4150d9cb37adc74652845cf613e77b)
+
+![](https://secure2.wostatic.cn/static/szAqURkx5pQRen7EHb3wi9/image.png?auth_key=1767516045-bVxsgk73tQrxDjc5Fw6f5m-0-8ced5b803c6282cf1b49aeaf3179a251)
+
+`avrdude-split-left`/`:avrdude-split-right`
+
+![](https://secure2.wostatic.cn/static/gt7p39ZenLsEiB6bch6ZDg/image.png?auth_key=1767516045-fN3zdtvwzPkf3ah3vvK1x1-0-1787d3ffbe9bdfd3a3d5ce66c7ee491f)
+
+2021.11.28
+
+严重大问题，两个板子无法通信，已知接线没有问题，单独拿杜邦线连接的时候也没用😩
+
+迷之解决办法:把一块板子的vcc和另外一块板子的gnd互连。">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://huoyucat.github.io/post/fen-ti-jian-pan-diy.html">
+<meta property="og:image" content="https://github.githubassets.com/favicons/favicon.svg">
+<title>分体键盘diy</title>
+
+
+
+</head>
+<style>
+body{box-sizing: border-box;min-width: 200px;max-width: 900px;margin: 20px auto;padding: 45px;font-size: 16px;font-family: sans-serif;line-height: 1.25;}
+#header{display:flex;padding-bottom:8px;border-bottom: 1px solid var(--borderColor-muted, var(--color-border-muted));margin-bottom: 16px;}
+#footer {margin-top:64px; text-align: center;font-size: small;}
+
+</style>
+
+<style>
+.postTitle{margin: auto 0;font-size:40px;font-weight:bold;}
+.title-right{display:flex;margin:auto 0 0 auto;}
+.title-right .circle{padding: 14px 16px;margin-right:8px;}
+#postBody{border-bottom: 1px solid var(--color-border-default);padding-bottom:36px;}
+#postBody hr{height:2px;}
+#cmButton{height:48px;margin-top:48px;}
+#comments{margin-top:64px;}
+.g-emoji{font-size:24px;}
+@media (max-width: 600px) {
+    body {padding: 8px;}
+    .postTitle{font-size:24px;}
+}
+
+</style>
+
+
+
+
+<body>
+    <div id="header">
+<h1 class="postTitle">分体键盘diy</h1>
+<div class="title-right">
+    <a href="https://huoyucat.github.io" id="buttonHome" class="btn btn-invisible circle" title="首页">
+        <svg class="octicon" width="16" height="16">
+            <path id="pathHome" fill-rule="evenodd"></path>
+        </svg>
+    </a>
+    
+    <a href="https://github.com/Huoyucat/huoyucat.github.io/issues/1" target="_blank" class="btn btn-invisible circle" title="Issue">
+        <svg class="octicon" width="16" height="16">
+            <path id="pathIssue" fill-rule="evenodd"></path>
+        </svg>
+    </a>
+    
+
+    <a class="btn btn-invisible circle" onclick="modeSwitch();" title="切换主题">
+        <svg class="octicon" width="16" height="16" >
+            <path id="themeSwitch" fill-rule="evenodd"></path>
+        </svg>
+    </a>
+
+</div>
+</div>
+    <div id="content">
+<div class="markdown-body" id="postBody"><h1>前期调研</h1>
+<h3>套件选择：</h3>
+<p>平面：lily58,lily58pro,sofle keyboard（sofle相当于加了旋钮的lily58),<a href="https://post.smzdm.com/p/487452/" rel="nofollow">Ergodone</a>(大号分体）, crone(没有数字区不适合打中文）,<a href="https://botiostudio.com/redox-keyboard-split-ergo/" rel="nofollow">Redox</a>(大号分体）,Helix(纯平面）</p>
+<p>曲面：dactyl manuform</p>
+<p>目标：便携，易用，能用上现有的材料.容易制作，开源，有丰富的案例,轴座为热插拔</p>
+<p>结论：<a href="https://josefadamcik.github.io/SofleKeyboard/build_guide.html" rel="nofollow">sofle v2</a>(v1和v2的区别是v1支持矮轴）</p>
+<p>主要目标：复刻sofle v2</p>
+<p>次要目标：把旋钮改成摇杆,加入缓震材料</p>
+<p>主要工具：吸锡器，焊笔，放大镜</p>
+<p>前期补充资料：</p>
+<p><a href="https://learn.sparkfun.com/tutorials/pro-micro--fio-v3-hookup-guide" rel="nofollow">Pro Micro &amp; Fio V3 Hookup Guide - learn.sparkfun.com</a></p>
+<p><a href="https://github.com/josefadamcik/SofleKeyboard/issues/3#issuecomment-683192038" data-hovercard-type="issue" data-hovercard-url="/josefadamcik/SofleKeyboard/issues/3/hovercard">Inverted silkscreen? · Issue #3 · josefadamcik/SofleKeyboard · GitHub</a></p>
+<h2>物料清单</h2>
+<p><a href="https://www.wolai.com/wocobD2oxbodEEgXWohuAo" rel="nofollow">材料清单</a></p>
+<ul class="contains-task-list">
+<li class="task-list-item"><input type="checkbox" id="" disabled="" class="task-list-item-checkbox" aria-label="Completed task" checked=""> 凯华轴座58个</li>
+<li class="task-list-item"><input type="checkbox" id="" disabled="" class="task-list-item-checkbox" aria-label="Completed task" checked=""> pcb打板</li>
+<li class="task-list-item"><input type="checkbox" id="" disabled="" class="task-list-item-checkbox" aria-label="Completed task" checked=""> 定位板和底板</li>
+<li class="task-list-item"><input type="checkbox" id="" disabled="" class="task-list-item-checkbox" aria-label="Completed task" checked=""> <strong>1N4148W</strong> SOD123 package 58</li>
+<li class="task-list-item"><input type="checkbox" id="" disabled="" class="task-list-item-checkbox" aria-label="Completed task" checked=""> ssd1306 128*32 oled 2</li>
+<li class="task-list-item"><input type="checkbox" id="" disabled="" class="task-list-item-checkbox" aria-label="Completed task" checked=""> 音频端子 2</li>
+<li class="task-list-item"><input type="checkbox" id="" disabled="" class="task-list-item-checkbox" aria-label="Completed task" checked=""> 音频线</li>
+<li class="task-list-item"><input type="checkbox" id="" disabled="" class="task-list-item-checkbox" aria-label="Completed task" checked=""> 两脚轻触开关 2</li>
+<li class="task-list-item"><input type="checkbox" id="" disabled="" class="task-list-item-checkbox" aria-label="Completed task" checked=""> m2 6mm 铜柱 14个</li>
+<li class="task-list-item"><input type="checkbox" id="" disabled="" class="task-list-item-checkbox" aria-label="Completed task" checked=""> m2螺丝 28</li>
+<li class="task-list-item"><input type="checkbox" id="" disabled="" class="task-list-item-checkbox" aria-label="Completed task" checked=""> 防滑贴</li>
+<li class="task-list-item"><input type="checkbox" id="" disabled="" class="task-list-item-checkbox" aria-label="Completed task" checked=""> EC11编码器 2（最好是ec11e,不要是ec11k)</li>
+<li class="task-list-item"><input type="checkbox" id="" disabled="" class="task-list-item-checkbox" aria-label="Completed task" checked=""> 旋钮盖</li>
+<li class="task-list-item"><input type="checkbox" id="" disabled="" class="task-list-item-checkbox" aria-label="Completed task" checked=""> pro micro ATmega32U4</li>
+<li class="task-list-item"><input type="checkbox" id="" disabled="" class="task-list-item-checkbox" aria-label="Completed task" checked=""> 凯华轴座58个</li>
+<li class="task-list-item"><input type="checkbox" id="" disabled="" class="task-list-item-checkbox" aria-label="Completed task" checked=""> pcb打板5</li>
+<li class="task-list-item"><input type="checkbox" id="" disabled="" class="task-list-item-checkbox" aria-label="Completed task" checked=""> 定位板和底板2</li>
+<li class="task-list-item"><input type="checkbox" id="" disabled="" class="task-list-item-checkbox" aria-label="Completed task" checked=""> <strong>1N4148W</strong> SOD123 package 58</li>
+<li class="task-list-item"><input type="checkbox" id="" disabled="" class="task-list-item-checkbox" aria-label="Completed task" checked=""> ssd1306 128*32 oled 2</li>
+<li class="task-list-item"><input type="checkbox" id="" disabled="" class="task-list-item-checkbox" aria-label="Completed task" checked=""> 音频端子 2</li>
+<li class="task-list-item"><input type="checkbox" id="" disabled="" class="task-list-item-checkbox" aria-label="Completed task" checked=""> 音频线 1</li>
+<li class="task-list-item"><input type="checkbox" id="" disabled="" class="task-list-item-checkbox" aria-label="Completed task" checked=""> 两脚轻触开关 2</li>
+<li class="task-list-item"><input type="checkbox" id="" disabled="" class="task-list-item-checkbox" aria-label="Completed task" checked=""> m2 6mm 铜柱 14个</li>
+<li class="task-list-item"><input type="checkbox" id="" disabled="" class="task-list-item-checkbox" aria-label="Completed task" checked=""> m2螺丝 28</li>
+<li class="task-list-item"><input type="checkbox" id="" disabled="" class="task-list-item-checkbox" aria-label="Completed task" checked=""> 防滑贴 1</li>
+<li class="task-list-item"><input type="checkbox" id="" disabled="" class="task-list-item-checkbox" aria-label="Completed task" checked=""> EC11编码器 2（最好是ec11e,不要是ec11k)</li>
+<li class="task-list-item"><input type="checkbox" id="" disabled="" class="task-list-item-checkbox" aria-label="Completed task" checked=""> 旋钮盖 2</li>
+<li class="task-list-item"><input type="checkbox" id="" disabled="" class="task-list-item-checkbox" aria-label="Completed task" checked=""> pro micro ATmega32U4 2</li>
+<li class="task-list-item"><input type="checkbox" id="" disabled="" class="task-list-item-checkbox" aria-label="Completed task" checked=""> 收货确认</li>
+</ul>
+<h2>固件和编程</h2>
+<p><a target="_blank" rel="noopener noreferrer nofollow" href="https://camo.githubusercontent.com/2bf6e450564249ac778d535ece3fa8db411a51dc6986d6631d8d72cda1f9f0cd/68747470733a2f2f736563757265322e776f7374617469632e636e2f7374617469632f36464544484a336d5947573451446339364d4d646f6e2f696d6167652e706e673f617574685f6b65793d313736373531363034352d6b426a694e646838515a45386467394133507043487a2d302d3762373132663162613864653164363234633064613466316266306639316131"><img src="https://camo.githubusercontent.com/2bf6e450564249ac778d535ece3fa8db411a51dc6986d6631d8d72cda1f9f0cd/68747470733a2f2f736563757265322e776f7374617469632e636e2f7374617469632f36464544484a336d5947573451446339364d4d646f6e2f696d6167652e706e673f617574685f6b65793d313736373531363034352d6b426a694e646838515a45386467394133507043487a2d302d3762373132663162613864653164363234633064613466316266306639316131" alt="" data-canonical-src="https://secure2.wostatic.cn/static/6FEDHJ3mYGW4QDc96MMdon/image.png?auth_key=1767516045-kBjiNdh8QZE8dg9A3PpCHz-0-7b712f1ba8de1d624c0da4f1bf0f91a1" style="max-width: 100%;"></a></p>
+<p><a href="https://www.wolai.com/vAcvf8xEfaBSCkAAbtppwz" rel="nofollow">qmk教程</a></p>
+<ol>
+<li>确保qmk的环境设置好</li>
+<li>不要连接trrs音频线</li>
+<li>将一半的键盘连接到电脑上面,flash固件,使用reset按钮</li>
+<li>另外一半的键盘也要如此</li>
+<li>断开usb连接，将两个键盘用trrs连接</li>
+<li>用usb线连接左边的键盘</li>
+<li><strong>Enjoy!!!</strong></li>
+</ol>
+<h2>时间表</h2>
+<p><strong>2021.11.23-24</strong></p>
+<p>周二或周三物料和工具到齐</p>
+<p><strong>2021.11.24-12.1</strong></p>
+<p>焊接预计时间为一到两天，刷入固件</p>
+<p><strong>ddl暂定12月1日</strong></p>
+<h3>日志</h3>
+<p>2021/11/26</p>
+<p>问题：只有单一的板子工作，另外一块板子电源亮，指示灯亮，但是无法工作，oled屏幕显示乱码</p>
+<p><a href="https://docs.qmk.fm/#/feature_split_keyboard?id=required-hardware" rel="nofollow">Split Keyboard (qmk.fm)</a></p>
+<p><a target="_blank" rel="noopener noreferrer nofollow" href="https://camo.githubusercontent.com/9da9af06fca8aa107b0cc97949a2cb3bc7a7f8c70b8690b7c8f744287fc24334/68747470733a2f2f736563757265322e776f7374617469632e636e2f7374617469632f6277595477796b47554373636676714c51325662346a2f696d6167652e706e673f617574685f6b65793d313736373531363034352d74796a4162614b44454d68513779334b456634554a702d302d6163363831336439633736643430333565326565383437333433343434663161"><img src="https://camo.githubusercontent.com/9da9af06fca8aa107b0cc97949a2cb3bc7a7f8c70b8690b7c8f744287fc24334/68747470733a2f2f736563757265322e776f7374617469632e636e2f7374617469632f6277595477796b47554373636676714c51325662346a2f696d6167652e706e673f617574685f6b65793d313736373531363034352d74796a4162614b44454d68513779334b456634554a702d302d6163363831336439633736643430333565326565383437333433343434663161" alt="" data-canonical-src="https://secure2.wostatic.cn/static/bwYTwykGUCscfvqLQ2Vb4j/image.png?auth_key=1767516045-tyjAbaKDEMhQ7y3KEf4UJp-0-ac6813d9c76d4035e2ee847343444f1a" style="max-width: 100%;"></a></p>
+<p><a target="_blank" rel="noopener noreferrer nofollow" href="https://camo.githubusercontent.com/a3a6b003f5d41e13e43214e92eda965282dfc1686a9b0877c97d1a5e2ff33745/68747470733a2f2f736563757265322e776f7374617469632e636e2f7374617469632f737a417155526b7835705152656e37454862337769392f696d6167652e706e673f617574685f6b65793d313736373531363034352d6b45714b75554447424870444b7168353835396b6b6d2d302d3862343135306439636233376164633734363532383435636636313365373762"><img src="https://camo.githubusercontent.com/a3a6b003f5d41e13e43214e92eda965282dfc1686a9b0877c97d1a5e2ff33745/68747470733a2f2f736563757265322e776f7374617469632e636e2f7374617469632f737a417155526b7835705152656e37454862337769392f696d6167652e706e673f617574685f6b65793d313736373531363034352d6b45714b75554447424870444b7168353835396b6b6d2d302d3862343135306439636233376164633734363532383435636636313365373762" alt="" data-canonical-src="https://secure2.wostatic.cn/static/szAqURkx5pQRen7EHb3wi9/image.png?auth_key=1767516045-kEqKuUDGBHpDKqh5859kkm-0-8b4150d9cb37adc74652845cf613e77b" style="max-width: 100%;"></a></p>
+<p><a target="_blank" rel="noopener noreferrer nofollow" href="https://camo.githubusercontent.com/e20ebc1004e43c5c0f0b34cec9ab13d119db43134a14af0df54f9fbc82a64ec8/68747470733a2f2f736563757265322e776f7374617469632e636e2f7374617469632f737a417155526b7835705152656e37454862337769392f696d6167652e706e673f617574685f6b65793d313736373531363034352d62567873676b373374517278446a633546773666356d2d302d3863656435623830336336323832636631623439616561663331373961323531"><img src="https://camo.githubusercontent.com/e20ebc1004e43c5c0f0b34cec9ab13d119db43134a14af0df54f9fbc82a64ec8/68747470733a2f2f736563757265322e776f7374617469632e636e2f7374617469632f737a417155526b7835705152656e37454862337769392f696d6167652e706e673f617574685f6b65793d313736373531363034352d62567873676b373374517278446a633546773666356d2d302d3863656435623830336336323832636631623439616561663331373961323531" alt="" data-canonical-src="https://secure2.wostatic.cn/static/szAqURkx5pQRen7EHb3wi9/image.png?auth_key=1767516045-bVxsgk73tQrxDjc5Fw6f5m-0-8ced5b803c6282cf1b49aeaf3179a251" style="max-width: 100%;"></a></p>
+<p><code class="notranslate">avrdude-split-left</code>/<code class="notranslate">:avrdude-split-right</code></p>
+<p><a target="_blank" rel="noopener noreferrer nofollow" href="https://camo.githubusercontent.com/7a8b7fbba78048b52085cc4ce466c10116ccfb9aeaa73c009fc285353abbeebc/68747470733a2f2f736563757265322e776f7374617469632e636e2f7374617469632f6774377033395a656e4c7345694236626368365a44672f696d6167652e706e673f617574685f6b65793d313736373531363034352d664e337a647476777a506b663361683376764b3178312d302d3137383764336666626539626466643361336435636536366337656534393166"><img src="https://camo.githubusercontent.com/7a8b7fbba78048b52085cc4ce466c10116ccfb9aeaa73c009fc285353abbeebc/68747470733a2f2f736563757265322e776f7374617469632e636e2f7374617469632f6774377033395a656e4c7345694236626368365a44672f696d6167652e706e673f617574685f6b65793d313736373531363034352d664e337a647476777a506b663361683376764b3178312d302d3137383764336666626539626466643361336435636536366337656534393166" alt="" data-canonical-src="https://secure2.wostatic.cn/static/gt7p39ZenLsEiB6bch6ZDg/image.png?auth_key=1767516045-fN3zdtvwzPkf3ah3vvK1x1-0-1787d3ffbe9bdfd3a3d5ce66c7ee491f" style="max-width: 100%;"></a></p>
+<p>2021.11.28</p>
+<p>严重大问题，两个板子无法通信，已知接线没有问题，单独拿杜邦线连接的时候也没用😩</p>
+<p>迷之解决办法:把一块板子的vcc和另外一块板子的gnd互连。估计这样电路重置了，可能是板子本身有问题。</p>
+<p>买加长的母插让oled有合适的位置</p>
+<p>目前via还是无法识别设备</p>
+<p>2021/11/29</p>
+<p>via无法识别，换电脑解决了，虚拟机也可以用。考虑要不要重装电脑。</p>
+<p><a href="https://www.wolai.com/tk1tqCzB9TBZzVqbeDUtft" rel="nofollow">via教程</a></p>
+<h2>注意</h2>
+<ol>
+<li>轴座的位置不要放反，不然轴体无法插入</li>
+<li>pro micro和oled的高度要不一样，要买不同高度的排插和母座</li>
+<li>焊板子的时候不要焊弯针脚</li>
+<li>螺丝要买机钉螺丝，不要买自攻</li>
+</ol>
+<h2>未来展望：</h2>
+<p>加入轨迹球或者摇杆</p>
+<p><a href="https://github.com/foureight84/sofle-keyboard-pimoroni">GitHub - foureight84/sofle-keyboard-pimoroni: Pimoroni Trackball integration with Sofle Keyboard</a></p>
+<p>I2C pins are still available on the V2 revision as per this <a href="https://www.reddit.com/r/ErgoMechKeyboards/comments/o3zwgn/sofle_v21_rgb_pcb_with_trackball/" rel="nofollow">reddit post</a> by <a href="https://www.reddit.com/user/tenstaana/" rel="nofollow">tenstaana</a></p>
+<p><a href="https://www.reddit.com/r/ErgoMechKeyboards/comments/o3zwgn/sofle_v21_rgb_pcb_with_trackball/" rel="nofollow">Sofle v2.1 RGB pcb with trackball : ErgoMechKeyboards (reddit.com)</a></p>
+<p><a href="https://post.smzdm.com/p/akx8kx78/" rel="nofollow">轨迹球单手键盘 QMK RGB 热拔插_键盘_什么值得买 (smzdm.com)</a></p>
+<p><a href="https://post.smzdm.com/p/aqxqd5xp/" rel="nofollow">https://post.smzdm.com/p/aqxqd5xp/</a></p>
+<p>分析：国外方案是采用pimoroni的trackball breakout,暂时找不到购买方案，而且五个针脚刚刚合适</p>
+<p><a href="https://shop.pimoroni.com/products/trackball-breakout" rel="nofollow">Trackball Breakout – Pimoroni</a></p>
+<p><a target="_blank" rel="noopener noreferrer nofollow" href="https://camo.githubusercontent.com/59b4b61f37d69f68a7bbe2005479d05852faec64be8b749c3abe66f51deb169b/68747470733a2f2f736563757265322e776f7374617469632e636e2f7374617469632f6b665433743271425a6b70503451783570466d6739632f38783275786a383267643637312e6a70673f617574685f6b65793d313736373531363034352d69457868427947566657596a4e4146363347554e75722d302d6463646266373036316634353063313962333837376661323666616337643965"><img src="https://camo.githubusercontent.com/59b4b61f37d69f68a7bbe2005479d05852faec64be8b749c3abe66f51deb169b/68747470733a2f2f736563757265322e776f7374617469632e636e2f7374617469632f6b665433743271425a6b70503451783570466d6739632f38783275786a383267643637312e6a70673f617574685f6b65793d313736373531363034352d69457868427947566657596a4e4146363347554e75722d302d6463646266373036316634353063313962333837376661323666616337643965" alt="" data-canonical-src="https://secure2.wostatic.cn/static/kfT3t2qBZkpP4Qx5pFmg9c/8x2uxj82gd671.jpg?auth_key=1767516045-iExhByGVfWYjNAF63GUNur-0-dcdbf7061f450c19b3877fa26fac7d9e" style="max-width: 100%;"></a></p>
+<p><a target="_blank" rel="noopener noreferrer nofollow" href="https://camo.githubusercontent.com/b22432eeb7209b87aa7d4046791e80b6bc4c5dc9747b0b8b1d41d60b1d8f3f47/68747470733a2f2f736563757265322e776f7374617469632e636e2f7374617469632f7652534d363971636d4c6464484d77353461425765682f696d6167652e706e673f617574685f6b65793d313736373531363034352d6d37476d6a46657869746e52537273416464577931542d302d3865666665666333346330623366656538313638383761613934393362336561"><img src="https://camo.githubusercontent.com/b22432eeb7209b87aa7d4046791e80b6bc4c5dc9747b0b8b1d41d60b1d8f3f47/68747470733a2f2f736563757265322e776f7374617469632e636e2f7374617469632f7652534d363971636d4c6464484d77353461425765682f696d6167652e706e673f617574685f6b65793d313736373531363034352d6d37476d6a46657869746e52537273416464577931542d302d3865666665666333346330623366656538313638383761613934393362336561" alt="" data-canonical-src="https://secure2.wostatic.cn/static/vRSM69qcmLddHMw54aBWeh/image.png?auth_key=1767516045-m7GmjFexitnRSrsAddWy1T-0-8effefc34c0b3fee816887aa9493b3ea" style="max-width: 100%;"></a></p>
+<p>ps2摇杆</p>
+<p><a href="https://www.sohu.com/a/417990890_100281310" rel="nofollow">PS2游戏摇杆原理及控制实现_按键 (sohu.com)</a></p>
+<p><a href="https://blog.csdn.net/xieyan0811/article/details/56011832" rel="nofollow">Arduino简单实例之四_PS2游戏摇杆_谢彦的技术博客-CSDN博客_arduino ps2</a></p>
+<p><a target="_blank" rel="noopener noreferrer nofollow" href="https://camo.githubusercontent.com/a205a60d200795f3b7ad8559c5d0357b797c7fe04def8158db5f4bc6146b9c01/68747470733a2f2f736563757265322e776f7374617469632e636e2f7374617469632f6333765a55726d4d5a796679456952764631356775552f696d6167652e706e673f617574685f6b65793d313736373531363034352d627274774c4256464b6d5374716f39546e7761554a582d302d3362303661613033376536643338646334313262396439616662386637653032"><img src="https://camo.githubusercontent.com/a205a60d200795f3b7ad8559c5d0357b797c7fe04def8158db5f4bc6146b9c01/68747470733a2f2f736563757265322e776f7374617469632e636e2f7374617469632f6333765a55726d4d5a796679456952764631356775552f696d6167652e706e673f617574685f6b65793d313736373531363034352d627274774c4256464b6d5374716f39546e7761554a582d302d3362303661613033376536643338646334313262396439616662386637653032" alt="" data-canonical-src="https://secure2.wostatic.cn/static/c3vZUrmMZyfyEiRvF15guU/image.png?auth_key=1767516045-brtwLBVFKmStqo9TnwaUJX-0-3b06aa037e6d38dc412b9d9afb8f7e02" style="max-width: 100%;"></a></p>
+<p>罗技逻辑球，简单易改造，只需要塞入合适的位置，不需要管固件</p>
+<p><a href="https://item.taobao.com/item.htm?spm=a230r.1.14.19.355d6860DNoMpO&amp;id=621149796065&amp;ns=1&amp;abbucket=12#detail" rel="nofollow">轨迹球板+PS2母转USB公转接头板 PS2键盘鼠标转换 一套价 diy-淘宝网 (taobao.com)</a></p>
+<p><a href="https://post.m.smzdm.com/p/avw7z3qp/" rel="nofollow">https://post.m.smzdm.com/p/avw7z3qp/</a>?</p>
+<p><a target="_blank" rel="noopener noreferrer nofollow" href="https://camo.githubusercontent.com/61660feba80e3c7e16aca382f8195c6f250e40c09fe529d0161109ec541fdca4/68747470733a2f2f736563757265322e776f7374617469632e636e2f7374617469632f745444616b3748455541706e786d45515848456162312f696d6167652e706e673f617574685f6b65793d313736373531363034352d7757594d61763143743533796d41365544364e6b69722d302d6263306535623138613864396237333039333131333630383463356532356161"><img src="https://camo.githubusercontent.com/61660feba80e3c7e16aca382f8195c6f250e40c09fe529d0161109ec541fdca4/68747470733a2f2f736563757265322e776f7374617469632e636e2f7374617469632f745444616b3748455541706e786d45515848456162312f696d6167652e706e673f617574685f6b65793d313736373531363034352d7757594d61763143743533796d41365544364e6b69722d302d6263306535623138613864396237333039333131333630383463356532356161" alt="" data-canonical-src="https://secure2.wostatic.cn/static/tTDak7HEUApnxmEQXHEab1/image.png?auth_key=1767516045-wWYMav1Ct53ymA6UD6Nkir-0-bc0e5b18a8d9b730931136084c5e25aa" style="max-width: 100%;"></a></p>
+<p>触摸板：</p>
+<p><a href="https://item.taobao.com/item.htm?spm=a230r.1.14.1.76829061q5nU1X&amp;id=586856886897&amp;ns=1&amp;abbucket=12#detail" rel="nofollow">HTT5288 eKT2101 eKTF2132 CY8CTMA463-4QI 触摸板-淘宝网 (taobao.com)</a></p>
+<p>（有试错成本的）</p>
+<p>自制键帽：３ｄ打印，树脂</p>
+<p><a href="https://post.smzdm.com/p/aqn9px9k/" rel="nofollow">没有合适的键帽怎么办？3D打印呀！不会建模？不需要！_其他数码配件_什么值得买 (smzdm.com)</a></p>
+<p>trackpoint小红点</p>
+<p>搖桿控制滑鼠</p>
+<p>QMK配合幾款搖桿小心得</p>
+<ol>
+<li></li>
+</ol>
+<p>最上面那款使用起來最簡單</p>
+<p>基本上就是一種開關</p>
+<p>往哪個方向扳那個方向的訊號就會跟common點導通</p>
+<p>所以用QMK的話只要當一般掃描按鍵時的接法和設定方法設定KC_MS_*那些按鍵就可以直接使用</p>
+<p>要說缺點就是要用的pin腳有點多</p>
+<ol start="2">
+<li></li>
+</ol>
+<p>中間那款搖桿原理是用電位器(可變電阻)方式分壓</p>
+<p>使用上就稍微需要用到Analog輸入相關的東東</p>
+<p>我也是抄人家的原始碼才會使用</p>
+<p>(qmk_firmware/keyboards/40percentclub/nano/keymaps/drashna)</p>
+<p>優缺點除了控制上比較複雜和多用一些程式碼控制外</p>
+<p>再來其實就是數位和類比的差別</p>
+<p>需要pin比較少</p>
+<p>但那個pin腳其實就是用ADC換來的</p>
+<p>還好我那塊teensy++ 2.0剛好Analog輸入Pin腳空著所以才有辦法加上去</p>
+<ol start="3">
+<li></li>
+</ol>
+<p>最下面這款</p>
+<p>這個軌跡球其實還沒試</p>
+<p>之前有看到大大有用過</p>
+<p>但是是用Arduino IDE開發的</p>
+<p>直接用qmk compile的話</p>
+<p>還不確定一些function如pulseIn()有沒有辦法移植過來</p>
+<p><a target="_blank" rel="noopener noreferrer nofollow" href="https://camo.githubusercontent.com/a36b20481f313b6713925995b22f621a80e40f06dadd558f9c235d04d3d7e526/68747470733a2f2f736563757265322e776f7374617469632e636e2f7374617469632f77714a5467647772424d725533476e3772674a5a41512f696d6167652e706e673f617574685f6b65793d313736373531363034352d7758577354543144737a5363536663753870686744342d302d3232373035643135613233353733396539346130653061303536616364646635"><img src="https://camo.githubusercontent.com/a36b20481f313b6713925995b22f621a80e40f06dadd558f9c235d04d3d7e526/68747470733a2f2f736563757265322e776f7374617469632e636e2f7374617469632f77714a5467647772424d725533476e3772674a5a41512f696d6167652e706e673f617574685f6b65793d313736373531363034352d7758577354543144737a5363536663753870686744342d302d3232373035643135613233353733396539346130653061303536616364646635" alt="" data-canonical-src="https://secure2.wostatic.cn/static/wqJTgdwrBMrU3Gn7rgJZAQ/image.png?auth_key=1767516045-wXWsTT1DszScSfcu8phgD4-0-22705d15a235739e94a0e0a056acddf5" style="max-width: 100%;"></a></p>
+<h3>新购入配件</h3>
+<ul class="contains-task-list">
+<li class="task-list-item"><input type="checkbox" id="" disabled="" class="task-list-item-checkbox" aria-label="Incomplete task"> 触控板</li>
+<li class="task-list-item"><input type="checkbox" id="" disabled="" class="task-list-item-checkbox" aria-label="Incomplete task"> 轨迹球</li>
+<li class="task-list-item"><input type="checkbox" id="" disabled="" class="task-list-item-checkbox" aria-label="Incomplete task"> nfc标签贴</li>
+</ul>
+<h2>经验</h2>
+<p>pcb设计的时候可以采用双面或者可以部分掰断的设计，来减少打样的费用</p>
+<p>mitosis设计中，甚至pcb本身可以是定位板</p>
+<h2>无线分体键盘</h2>
+<p>mitosis</p>
+<p>[GitHub - YCF/mitosis-mod: Only for my personal version:<a href="https://github.com/YCF/mitosis-hardware-mod">mitosis-hardware-mod</a>](<a href="https://github.com/YCF/mitosis-mod">https://github.com/YCF/mitosis-mod</a>)</p>
+<p>redox-wireless</p>
+<p><a href="https://github.com/mattdibi/redox-w-firmware">GitHub - mattdibi/redox-w-firmware: Firmware for nordic MCUs used in the Redox wireless keyboard</a></p>
+<p><a href="https://github.com/mattdibi/redox-keyboard/tree/master/redox-w">https://github.com/mattdibi/redox-keyboard/tree/master/redox-w</a></p>
+<p>interphase</p>
+<p><a href="https://github.com/Durburz/interphase">GitHub - Durburz/interphase: a mitosis clone with more keys!!1eleven</a></p>
+<p>蓝牙固件</p>
+<p><a href="https://github.com/Durburz/interphase-firmware">GitHub - Durburz/interphase-firmware: Firmware for interphase (a mitosis clone)</a></p>
+<p>bluemicro</p>
+<p><a href="https://github.com/jpconstantineau/BlueMicro_BLE">GitHub - jpconstantineau/BlueMicro_BLE: Keyboard Firmware for the Nordic nRF52 Series of Bluetooth SoC based on the Adafruit NRF52 Feather</a></p>
+<p>zmk</p>
+<p>qmk nrf52分支</p>
+<p>主控</p>
+<p><a href="https://github.com/joric/nrfmicro">GitHub - joric/nrfmicro: Pro Micro-compatible Bluetooth 5.2 board with Li-Po charger and USB-C (nRF52840-based)</a></p>
+<p>便宜主控</p>
+<p>nRF51822</p>
+<p>预计采取redox-w项目</p>
+<h1>Redox-w</h1>
+<p><a href="https://github.com/mattdibi/redox-keyboard/tree/master/redox-w">redox-keyboard/redox-w at master · mattdibi/redox-keyboard · GitHub</a></p>
+<p><a href="https://www.bilibili.com/video/BV15q4y1y7Ty?from=search&amp;seid=12739197624034511875" rel="nofollow">新手向-DIY无线分体键盘Redox_w-02-制作教程（无楠度）_哔哩哔哩_bilibili</a></p>
+<p>material list</p>
+<p>购买检查</p>
+<p>收货检查</p>
+<ul class="contains-task-list">
+<li class="task-list-item">
+<p><input type="checkbox" id="" disabled="" class="task-list-item-checkbox" aria-label="Completed task" checked=""> PCB*4</p>
+</li>
+<li class="task-list-item">
+<p><input type="checkbox" id="" disabled="" class="task-list-item-checkbox" aria-label="Completed task" checked=""> 底板和定位板</p>
+</li>
+<li class="task-list-item">
+<p><input type="checkbox" id="" disabled="" class="task-list-item-checkbox" aria-label="Completed task" checked=""> 凯华轴座*70</p>
+</li>
+<li class="task-list-item">
+<p><input type="checkbox" id="" disabled="" class="task-list-item-checkbox" aria-label="Completed task" checked=""> nrf51822*3</p>
+</li>
+<li class="task-list-item">
+<p><input type="checkbox" id="" disabled="" class="task-list-item-checkbox" aria-label="Completed task" checked=""> pro micro*1</p>
+</li>
+<li class="task-list-item">
+<p><input type="checkbox" id="" disabled="" class="task-list-item-checkbox" aria-label="Completed task" checked=""> 1117 SOT223 *1</p>
+</li>
+<li class="task-list-item">
+<p><input type="checkbox" id="" disabled="" class="task-list-item-checkbox" aria-label="Completed task" checked=""> white led *4</p>
+</li>
+<li class="task-list-item">
+<p><input type="checkbox" id="" disabled="" class="task-list-item-checkbox" aria-label="Completed task" checked=""> 330r 电阻 *2</p>
+</li>
+<li class="task-list-item">
+<p><input type="checkbox" id="" disabled="" class="task-list-item-checkbox" aria-label="Completed task" checked=""> 220r 电阻 *2</p>
+</li>
+<li class="task-list-item">
+<p><input type="checkbox" id="" disabled="" class="task-list-item-checkbox" aria-label="Completed task" checked=""> 1.5kr 电阻 *2</p>
+</li>
+<li class="task-list-item">
+<p><input type="checkbox" id="" disabled="" class="task-list-item-checkbox" aria-label="Completed task" checked=""> 轻触开关*1</p>
+</li>
+<li class="task-list-item">
+<p><input type="checkbox" id="" disabled="" class="task-list-item-checkbox" aria-label="Completed task" checked=""> SOD-123 1N4148/1N4148W *70</p>
+</li>
+<li class="task-list-item">
+<p><input type="checkbox" id="" disabled="" class="task-list-item-checkbox" aria-label="Completed task" checked=""> JS102011SAQN开关三脚二档位</p>
+</li>
+<li class="task-list-item">
+<p><input type="checkbox" id="" disabled="" class="task-list-item-checkbox" aria-label="Completed task" checked=""> 4p 90度排针 *2</p>
+</li>
+<li class="task-list-item">
+<p><input type="checkbox" id="" disabled="" class="task-list-item-checkbox" aria-label="Completed task" checked=""> 6p母座*2</p>
+</li>
+<li class="task-list-item">
+<p><input type="checkbox" id="" disabled="" class="task-list-item-checkbox" aria-label="Completed task" checked=""> STLinkV2</p>
+</li>
+<li class="task-list-item">
+<p><input type="checkbox" id="" disabled="" class="task-list-item-checkbox" aria-label="Completed task" checked=""> 3034纽扣电池座</p>
+</li>
+<li class="task-list-item">
+<p><input type="checkbox" id="" disabled="" class="task-list-item-checkbox" aria-label="Completed task" checked=""> PCB*4</p>
+</li>
+<li class="task-list-item">
+<p><input type="checkbox" id="" disabled="" class="task-list-item-checkbox" aria-label="Completed task" checked=""> 底板</p>
+</li>
+<li class="task-list-item">
+<p><input type="checkbox" id="" disabled="" class="task-list-item-checkbox" aria-label="Completed task" checked=""> 定位板</p>
+</li>
+<li class="task-list-item">
+<p><input type="checkbox" id="" disabled="" class="task-list-item-checkbox" aria-label="Completed task" checked=""> 凯华轴座*70</p>
+</li>
+<li class="task-list-item">
+<p><input type="checkbox" id="" disabled="" class="task-list-item-checkbox" aria-label="Completed task" checked=""> nrf51822*3</p>
+</li>
+<li class="task-list-item">
+<p><input type="checkbox" id="" disabled="" class="task-list-item-checkbox" aria-label="Completed task" checked=""> pro micro*1</p>
+</li>
+<li class="task-list-item">
+<p><input type="checkbox" id="" disabled="" class="task-list-item-checkbox" aria-label="Completed task" checked=""> 1117 SOT223 *1</p>
+</li>
+<li class="task-list-item">
+<p><input type="checkbox" id="" disabled="" class="task-list-item-checkbox" aria-label="Completed task" checked=""> white led *4</p>
+</li>
+<li class="task-list-item">
+<p><input type="checkbox" id="" disabled="" class="task-list-item-checkbox" aria-label="Completed task" checked=""> 330r 电阻 *2</p>
+</li>
+<li class="task-list-item">
+<p><input type="checkbox" id="" disabled="" class="task-list-item-checkbox" aria-label="Completed task" checked=""> 220r 电阻 *2</p>
+</li>
+<li class="task-list-item">
+<p><input type="checkbox" id="" disabled="" class="task-list-item-checkbox" aria-label="Completed task" checked=""> 1.5kr 电阻 *2</p>
+</li>
+<li class="task-list-item">
+<p><input type="checkbox" id="" disabled="" class="task-list-item-checkbox" aria-label="Completed task" checked=""> 轻触开关*1</p>
+</li>
+<li class="task-list-item">
+<p><input type="checkbox" id="" disabled="" class="task-list-item-checkbox" aria-label="Completed task" checked=""> SOD-123 1N4148/1N4148W *70</p>
+</li>
+<li class="task-list-item">
+<p><input type="checkbox" id="" disabled="" class="task-list-item-checkbox" aria-label="Completed task" checked=""> JS102011SAQN开关三脚二档位</p>
+</li>
+<li class="task-list-item">
+<p><input type="checkbox" id="" disabled="" class="task-list-item-checkbox" aria-label="Completed task" checked=""> 4p 90度排针 *2</p>
+</li>
+<li class="task-list-item">
+<p><input type="checkbox" id="" disabled="" class="task-list-item-checkbox" aria-label="Completed task" checked=""> 6p母座*2</p>
+</li>
+<li class="task-list-item">
+<p><input type="checkbox" id="" disabled="" class="task-list-item-checkbox" aria-label="Completed task" checked=""> STLinkV2</p>
+</li>
+<li class="task-list-item">
+<p><input type="checkbox" id="" disabled="" class="task-list-item-checkbox" aria-label="Completed task" checked=""> 3034纽扣电池座</p>
+</li>
+<li class="task-list-item">
+<p><input type="checkbox" id="" disabled="" class="task-list-item-checkbox" aria-label="Completed task" checked=""> 纽扣电池(CR2032)*2</p>
+</li>
+</ul>
+<p>接收器led电阻</p>
+<p><a target="_blank" rel="noopener noreferrer nofollow" href="https://camo.githubusercontent.com/6afafd45cada9c45c96be7ff3a77fa8ae97ab088e5738cd74f1b9ba62fce1b42/68747470733a2f2f736563757265322e776f7374617469632e636e2f7374617469632f366b74624e3837475a4b6947627a65686d506a666e552f696d6167652e706e673f617574685f6b65793d313736373531363034352d67504876685750394e74744d47444a6a7278485536412d302d3439646661626461313061396231646132346130653662373639643038396330"><img src="https://camo.githubusercontent.com/6afafd45cada9c45c96be7ff3a77fa8ae97ab088e5738cd74f1b9ba62fce1b42/68747470733a2f2f736563757265322e776f7374617469632e636e2f7374617469632f366b74624e3837475a4b6947627a65686d506a666e552f696d6167652e706e673f617574685f6b65793d313736373531363034352d67504876685750394e74744d47444a6a7278485536412d302d3439646661626461313061396231646132346130653662373639643038396330" alt="" data-canonical-src="https://secure2.wostatic.cn/static/6ktbN87GZKiGbzehmPjfnU/image.png?auth_key=1767516045-gPHvhWP9NttMGDJjrxHU6A-0-49dfabda10a9b1da24a0e6b769d089c0" style="max-width: 100%;"></a></p>
+<p><a target="_blank" rel="noopener noreferrer nofollow" href="https://camo.githubusercontent.com/f6a92d7eac415f48471d5a9b2d3939b79f282db81ecbebdf9c9387e9495a993a/68747470733a2f2f736563757265322e776f7374617469632e636e2f7374617469632f6468334b6a6b33727559663346696659354d6d4b54622f696d6167652e706e673f617574685f6b65793d313736373531363034352d65654a6b52784366384375684b3154636870336b454a2d302d3434613361383431353163623135313331653633386237626133663430336138"><img src="https://camo.githubusercontent.com/f6a92d7eac415f48471d5a9b2d3939b79f282db81ecbebdf9c9387e9495a993a/68747470733a2f2f736563757265322e776f7374617469632e636e2f7374617469632f6468334b6a6b33727559663346696659354d6d4b54622f696d6167652e706e673f617574685f6b65793d313736373531363034352d65654a6b52784366384375684b3154636870336b454a2d302d3434613361383431353163623135313331653633386237626133663430336138" alt="" data-canonical-src="https://secure2.wostatic.cn/static/dh3Kjk3ruYf3FifY5MmKTb/image.png?auth_key=1767516045-eeJkRxCf8CuhK1Tchp3kEJ-0-44a3a84151cb15131e638b7ba3f403a8" style="max-width: 100%;"></a></p>
+<h2>日志</h2>
+<p>2022/01/09已购买全部原材料</p>
+<p>2022/01/12 发现定位板的图纸有问题需要重新修改, 考虑要不要重新做</p>
+<p>2022/01/13定位板和底板打孔有问题， 缺少适合的工具和技术，导致一个nrf51822掉了一个焊盘</p>
+<p>2022/01/17通过直接短接芯片的引脚发现是可以正常触发的，意味着通信和刷入是成功的,新的模块无法再次刷入，可能有点问题，等热风枪。而且没有注意左右手。用风枪的时候记得考虑一下温度。</p>
+<p>拆机轴无法触发是因为带着锡会导致金属片产生便宜。目前解决办法是，拆开轴体安装完之后再装回去。</p>
+<h2>焊接</h2>
+<p>注意焊接顺序，安装官方的来</p>
+<ol>
+<li>
+<p>Solder D1, D2, D3 and D4 LEDs. See <a href="https://github.com/mattdibi/redox-keyboard/tree/master/redox-w#leds-installation-detail">image</a> for orientation.</p>
+</li>
+<li>
+<p>Solder R4, R6, R7 and R8 resistors.</p>
+</li>
+<li>
+<p>Solder R1, R2 and R3 resistors.</p>
+</li>
+<li>
+<p>Solder the AMS1117.</p>
+</li>
+<li>
+<p>Solder the Arduino Pro Micro headers.</p>
+</li>
+<li>
+<p>Solder the programming headers. I suggest you to cut the excess of the header <strong>before</strong> soldering the headers. You should stay as flush to the PCB surface as possible since the controller will be soldered above the headers. Use some masking tape to help you keep the header in place while soldering.</p>
+</li>
+<li>
+<p>Solder the YJ-14015. I suggest you to glue it in place or use some masking tape to help you during soldering.</p>
+</li>
+<li>
+<p>Upload the firmware and you're done.</p>
+</li>
+<li>
+<p>Solder the YJ-14015.</p>
+</li>
+<li>
+<p>Solder the right angle 0.1" header. To test the solder job try uploading the firmware as described in the dedicated section.</p>
+</li>
+<li>
+<p>Solder the diodes taking into account the right orientation. The cathode side (denoted by the vertical line on the packaging) should face the squared hole on the PCB. See the <a href="https://github.com/mattdibi/redox-keyboard/tree/master/redox-w#diodes-and-hot-swap-socket-detail">pictures</a> for reference. If you have already assembled the Redox receiver, you can now test if the PCB is working properly by connecting the STLinkV2 debugger for supplying power to the transmitter and using a pair of pliers to short the Kailh socket pins.</p>
+</li>
+<li>
+<p>Solder the Kailh hot-swap sockets.</p>
+</li>
+<li>
+<p>Solder the battery holders.</p>
+</li>
+<li>
+<p>Solder the slide switch.</p>
+</li>
+</ol>
+<h2>烧录</h2>
+<p>概括：promicro刷qmk,nrf用docker刷固件</p>
+<p>![](<a href="https://secure2.wostatic.cn/static/sbKuzaCb4yfuEjVYm4rRqv/20211216" rel="nofollow">https://secure2.wostatic.cn/static/sbKuzaCb4yfuEjVYm4rRqv/20211216</a> 114427791.png?auth_key=1767516045-r7AUPEUNVwYFgvzGydQmun-0-0239065c69e55f0dc80628e3d15ad03e)</p>
+<p><a href="https://blog.csdn.net/kdongyi/article/details/105620754" rel="nofollow">Windows 10里的WSL Ubuntu 怎么使用Windows系统的 SS 代理?_清晨的光明-CSDN博客_wsl 使用windows代理</a></p>
+<p><a href="https://blog.csdn.net/q85795362/article/details/120283801?spm=1001.2101.3001.6661.1&amp;utm_medium=distribute.pc_relevant_t0.none-task-blog-2~default~CTRLIST~default-1.no_search_link&amp;depth_1-utm_source=distribute.pc_relevant_t0.none-task-blog-2~default~CTRLIST~default-1.no_search_link&amp;utm_relevant_index=1" rel="nofollow">wsl2 ubuntu20.04子系统使用win10代理_程序员的博客-CSDN博客</a></p>
+<p>cd path/to/repository/redox-w-firmare/</p>
+<p>$ sudo cp 49-stlinkv2.rules /etc/udev/rules.d/</p>
+<p>$ udevadm control --reload-rules &amp;&amp; udevadm trigger</p>
+<p>sudo docker-compose build</p>
+<p>sudo docker-compose up</p>
+<p>接收器</p>
+<p>sudo docker exec -it redox-w-firmware_toolchain_1 ./redox-w-firmware/redox-w-receiver-basic/program.sh</p>
+<p>左侧</p>
+<p>sudo docker exec -it redox-w-firmware_toolchain_1 ./redox-w-firmware/redox-w-keyboard-basic/program_left.sh</p>
+<p>右侧</p>
+<p>sudo docker exec -it redox-w-firmware_toolchain_1 ./redox-w-firmware/redox-w-keyboard-basic/program_right.sh</p>
+<p>jvlink ob 刷固件办法</p>
+<p><a href="https://www.bilibili.com/video/BV15q4y1y7Ty?from=search&amp;seid=12739197624034511875" rel="nofollow">新手向-DIY无线分体键盘Redox_w-02-制作教程（无楠度）_哔哩哔哩_bilibili</a></p>
+<h3>接收器</h3>
+<h4>Arduino Pro Micro Firmware upload</h4>
+<p>$ cd path/to/qmk_firmware<br>
+$ make redox_w:default:avrdude</p>
+<p>记得rule.mk里面加上VIA_ENABLE = yes 才能使用VIA</p>
+<p>nrf51822</p>
+<p>进行到这一步还无法执行</p>
+<p>$ udevadm control --reload-rules &amp;&amp; udevadm trigger</p>
+<p>放弃wsl，用虚拟机已经执行成功，注意使用ubuntu desktop版本server暂时没解决ssh问题</p>
+<p>vm启动ubuntu的速度过慢</p>
+<p>外设相关配件</p>
+<p><a target="_blank" rel="noopener noreferrer nofollow" href="https://camo.githubusercontent.com/feb13f23e27463c94e1ea66a73f8cf4322645e474a63864aa7f702196ff57153/68747470733a2f2f736563757265322e776f7374617469632e636e2f7374617469632f6f646f36705755683377706b6f526f566553385234762f696d6167652e706e673f617574685f6b65793d313736373531363034352d6a65764b4647656f6b387752655062344838417763752d302d6334343333623261326532323935376332316133326162336335393635383633"><img src="https://camo.githubusercontent.com/feb13f23e27463c94e1ea66a73f8cf4322645e474a63864aa7f702196ff57153/68747470733a2f2f736563757265322e776f7374617469632e636e2f7374617469632f6f646f36705755683377706b6f526f566553385234762f696d6167652e706e673f617574685f6b65793d313736373531363034352d6a65764b4647656f6b387752655062344838417763752d302d6334343333623261326532323935376332316133326162336335393635383633" alt="" data-canonical-src="https://secure2.wostatic.cn/static/odo6pWUh3wpkoRoVeS8R4v/image.png?auth_key=1767516045-jevKFGeok8wRePb4H8Awcu-0-c4433b2a2e22957c21a32ab3c5965863" style="max-width: 100%;"></a></p>
+<h2>未来展望</h2>
+<p>锂电池充电</p></div>
+<div style="font-size:small;margin-top:8px;float:right;"></div>
+
+<button class="btn btn-block" type="button" onclick="openComments()" id="cmButton">评论</button>
+<div class="comments" id="comments"></div>
+
+</div>
+    <div id="footer"><div id="footer1">Copyright © <span id="copyrightYear"></span> <a href="https://huoyucat.github.io">Blog Title</a></div>
+<div id="footer2">
+    <span id="runday"></span><span>Powered by <a href="https://meekdai.com/Gmeek.html" target="_blank">Gmeek</a></span>
+</div>
+
+<script>
+var now=new Date();
+document.getElementById("copyrightYear").innerHTML=now.getFullYear();
+
+if(""!=""){
+    var startSite=new Date("");
+    var diff=now.getTime()-startSite.getTime();
+    var diffDay=Math.floor(diff/(1000*60*60*24));
+    document.getElementById("runday").innerHTML="网站运行"+diffDay+"天"+" • ";
+}
+</script></div>
+</body>
+<script>
+var IconList={'sun': 'M8 10.5a2.5 2.5 0 100-5 2.5 2.5 0 000 5zM8 12a4 4 0 100-8 4 4 0 000 8zM8 0a.75.75 0 01.75.75v1.5a.75.75 0 01-1.5 0V.75A.75.75 0 018 0zm0 13a.75.75 0 01.75.75v1.5a.75.75 0 01-1.5 0v-1.5A.75.75 0 018 13zM2.343 2.343a.75.75 0 011.061 0l1.06 1.061a.75.75 0 01-1.06 1.06l-1.06-1.06a.75.75 0 010-1.06zm9.193 9.193a.75.75 0 011.06 0l1.061 1.06a.75.75 0 01-1.06 1.061l-1.061-1.06a.75.75 0 010-1.061zM16 8a.75.75 0 01-.75.75h-1.5a.75.75 0 010-1.5h1.5A.75.75 0 0116 8zM3 8a.75.75 0 01-.75.75H.75a.75.75 0 010-1.5h1.5A.75.75 0 013 8zm10.657-5.657a.75.75 0 010 1.061l-1.061 1.06a.75.75 0 11-1.06-1.06l1.06-1.06a.75.75 0 011.06 0zm-9.193 9.193a.75.75 0 010 1.06l-1.06 1.061a.75.75 0 11-1.061-1.06l1.06-1.061a.75.75 0 011.061 0z', 'moon': 'M9.598 1.591a.75.75 0 01.785-.175 7 7 0 11-8.967 8.967.75.75 0 01.961-.96 5.5 5.5 0 007.046-7.046.75.75 0 01.175-.786zm1.616 1.945a7 7 0 01-7.678 7.678 5.5 5.5 0 107.678-7.678z', 'sync': 'M1.705 8.005a.75.75 0 0 1 .834.656 5.5 5.5 0 0 0 9.592 2.97l-1.204-1.204a.25.25 0 0 1 .177-.427h3.646a.25.25 0 0 1 .25.25v3.646a.25.25 0 0 1-.427.177l-1.38-1.38A7.002 7.002 0 0 1 1.05 8.84a.75.75 0 0 1 .656-.834ZM8 2.5a5.487 5.487 0 0 0-4.131 1.869l1.204 1.204A.25.25 0 0 1 4.896 6H1.25A.25.25 0 0 1 1 5.75V2.104a.25.25 0 0 1 .427-.177l1.38 1.38A7.002 7.002 0 0 1 14.95 7.16a.75.75 0 0 1-1.49.178A5.5 5.5 0 0 0 8 2.5Z', 'home': 'M6.906.664a1.749 1.749 0 0 1 2.187 0l5.25 4.2c.415.332.657.835.657 1.367v7.019A1.75 1.75 0 0 1 13.25 15h-3.5a.75.75 0 0 1-.75-.75V9H7v5.25a.75.75 0 0 1-.75.75h-3.5A1.75 1.75 0 0 1 1 13.25V6.23c0-.531.242-1.034.657-1.366l5.25-4.2Zm1.25 1.171a.25.25 0 0 0-.312 0l-5.25 4.2a.25.25 0 0 0-.094.196v7.019c0 .138.112.25.25.25H5.5V8.25a.75.75 0 0 1 .75-.75h3.5a.75.75 0 0 1 .75.75v5.25h2.75a.25.25 0 0 0 .25-.25V6.23a.25.25 0 0 0-.094-.195Z', 'github': 'M8 0c4.42 0 8 3.58 8 8a8.013 8.013 0 0 1-5.45 7.59c-.4.08-.55-.17-.55-.38 0-.27.01-1.13.01-2.2 0-.75-.25-1.23-.54-1.48 1.78-.2 3.65-.88 3.65-3.95 0-.88-.31-1.59-.82-2.15.08-.2.36-1.02-.08-2.12 0 0-.67-.22-2.2.82-.64-.18-1.32-.27-2-.27-.68 0-1.36.09-2 .27-1.53-1.03-2.2-.82-2.2-.82-.44 1.1-.16 1.92-.08 2.12-.51.56-.82 1.28-.82 2.15 0 3.06 1.86 3.75 3.64 3.95-.23.2-.44.55-.51 1.07-.46.21-1.61.55-2.33-.66-.15-.24-.6-.83-1.23-.82-.67.01-.27.38.01.53.34.19.73.9.82 1.13.16.45.68 1.31 2.69.94 0 .67.01 1.3.01 1.49 0 .21-.15.45-.55.38A7.995 7.995 0 0 1 0 8c0-4.42 3.58-8 8-8Z'};
+var utterancesLoad=0;
+
+let themeSettings={
+    "dark": ["dark","moon","#00f0ff","dark-blue"],
+    "light": ["light","sun","#ff5000","github-light"],
+    "auto": ["auto","sync","","preferred-color-scheme"]
+};
+function changeTheme(mode, icon, color, utheme){
+    document.documentElement.setAttribute("data-color-mode",mode);
+    document.getElementById("themeSwitch").setAttribute("d",value=IconList[icon]);
+    document.getElementById("themeSwitch").parentNode.style.color=color;
+    if(utterancesLoad==1){utterancesTheme(utheme);}
+}
+function modeSwitch(){
+    let currentMode=document.documentElement.getAttribute('data-color-mode');
+    let newMode = currentMode === "light" ? "dark" : currentMode === "dark" ? "auto" : "light";
+    localStorage.setItem("meek_theme", newMode);
+    if(themeSettings[newMode]){
+        changeTheme(...themeSettings[newMode]);
+    }
+}
+function utterancesTheme(theme){
+    const message={type:'set-theme',theme: theme};
+    const iframe=document.getElementsByClassName('utterances-frame')[0];
+    iframe.contentWindow.postMessage(message,'https://utteranc.es');
+}
+if(themeSettings[theme]){changeTheme(...themeSettings[theme]);}
+console.log("\n %c Gmeek last https://github.com/Meekdai/Gmeek \n","padding:5px 0;background:#02d81d;color:#fff");
+</script>
+
+<script>
+document.getElementById("pathHome").setAttribute("d",IconList["home"]);
+document.getElementById("pathIssue").setAttribute("d",IconList["github"]);
+
+
+
+function openComments(){
+    cm=document.getElementById("comments");
+    cmButton=document.getElementById("cmButton");
+    cmButton.innerHTML="loading";
+    span=document.createElement("span");
+    span.setAttribute("class","AnimatedEllipsis");
+    cmButton.appendChild(span);
+
+    script=document.createElement("script");
+    script.setAttribute("src","https://utteranc.es/client.js");
+    script.setAttribute("repo","Huoyucat/huoyucat.github.io");
+    script.setAttribute("issue-term","title");
+    
+    if(localStorage.getItem("meek_theme")=="dark"){script.setAttribute("theme","dark-blue");}
+    else if(localStorage.getItem("meek_theme")=="light") {script.setAttribute("theme","github-light");}
+    else{script.setAttribute("theme","preferred-color-scheme");}
+    
+    script.setAttribute("crossorigin","anonymous");
+    script.setAttribute("async","");
+    cm.appendChild(script);
+
+    int=self.setInterval("iFrameLoading()",200);
+}
+
+function iFrameLoading(){
+    var utterances=document.getElementsByClassName('utterances');
+    if(utterances.length==1){
+        if(utterances[0].style.height!=""){
+            utterancesLoad=1;
+            int=window.clearInterval(int);
+            document.getElementById("cmButton").style.display="none";
+            console.log("utterances Load OK");
+        }
+    }
+}
+
+
+
+</script>
+
+
+</html>

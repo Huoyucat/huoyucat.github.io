@@ -1,2 +1,110 @@
 <?xml version='1.0' encoding='UTF-8'?>
-<rss xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/" version="2.0"><channel><title>Blog Title</title><link>https://Meekdai.github.io/Gmeek-template</link><description>Blog description</description><copyright>Blog Title</copyright><docs>http://www.rssboard.org/rss-specification</docs><generator>python-feedgen</generator><image><url>https://github.githubassets.com/favicons/favicon.svg</url><title>avatar</title><link>https://Meekdai.github.io/Gmeek-template</link></image><lastBuildDate>Thu, 14 Mar 2024 09:17:29 +0000</lastBuildDate><managingEditor>Blog Title</managingEditor><ttl>60</ttl><webMaster>Blog Title</webMaster><item><title>请接着之后的安装步骤执行</title><link>https://Meekdai.github.io/Gmeek-template/post/qing-jie-zhao-zhi-hou-de-an-zhuang-bu-zou-zhi-xing.html</link><description>如果你点击了`READM.md`的链接后，看到了这个页面，请继续之后的安装步骤执行。</description><guid isPermaLink="true">https://Meekdai.github.io/Gmeek-template/post/qing-jie-zhao-zhi-hou-de-an-zhuang-bu-zou-zhi-xing.html</guid><pubDate>Thu, 14 Mar 2024 09:15:10 +0000</pubDate></item><item><title>这是Gmeek模板仓库</title><link>https://Meekdai.github.io/Gmeek-template/post/zhe-shi-Gmeek-mo-ban-cang-ku.html</link><description>通过这个模板创建库，可以大大减少部署Gmeek博客的配置步骤。</description><guid isPermaLink="true">https://Meekdai.github.io/Gmeek-template/post/zhe-shi-Gmeek-mo-ban-cang-ku.html</guid><pubDate>Wed, 20 Dec 2023 07:42:24 +0000</pubDate></item></channel></rss>
+<rss xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/" version="2.0"><channel><title>Blog Title</title><link>https://huoyucat.github.io</link><description>Blog description</description><copyright>Blog Title</copyright><docs>http://www.rssboard.org/rss-specification</docs><generator>python-feedgen</generator><image><url>https://github.githubassets.com/favicons/favicon.svg</url><title>avatar</title><link>https://huoyucat.github.io</link></image><lastBuildDate>Sun, 04 Jan 2026 09:34:27 +0000</lastBuildDate><managingEditor>Blog Title</managingEditor><ttl>60</ttl><webMaster>Blog Title</webMaster><item><title>分体键盘diy</title><link>https://huoyucat.github.io/post/fen-ti-jian-pan-diy.html</link><description># 前期调研
+
+### 套件选择：
+
+  平面：lily58,lily58pro,sofle keyboard（sofle相当于加了旋钮的lily58),[Ergodone](https://post.smzdm.com/p/487452/)(大号分体）, crone(没有数字区不适合打中文）,[Redox](https://botiostudio.com/redox-keyboard-split-ergo/)(大号分体）,Helix(纯平面）
+
+  曲面：dactyl manuform
+
+目标：便携，易用，能用上现有的材料.容易制作，开源，有丰富的案例,轴座为热插拔
+
+结论：[sofle v2](https://josefadamcik.github.io/SofleKeyboard/build_guide.html)(v1和v2的区别是v1支持矮轴）
+
+主要目标：复刻sofle v2
+
+次要目标：把旋钮改成摇杆,加入缓震材料
+
+主要工具：吸锡器，焊笔，放大镜
+
+前期补充资料：
+
+[Pro Micro &amp; Fio V3 Hookup Guide - learn.sparkfun.com](https://learn.sparkfun.com/tutorials/pro-micro--fio-v3-hookup-guide)
+
+[Inverted silkscreen? · Issue #3 · josefadamcik/SofleKeyboard · GitHub](https://github.com/josefadamcik/SofleKeyboard/issues/3#issuecomment-683192038)
+
+## 物料清单
+
+[材料清单](https://www.wolai.com/wocobD2oxbodEEgXWohuAo)
+
+- [x] 凯华轴座58个
+- [x] pcb打板
+- [x] 定位板和底板
+- [x] **1N4148W** SOD123 package 58
+- [x] ssd1306 128*32 oled 2
+- [x] 音频端子 2
+- [x] 音频线
+- [x] 两脚轻触开关 2
+- [x] m2 6mm 铜柱 14个
+- [x] m2螺丝 28
+- [x] 防滑贴
+- [x] EC11编码器 2（最好是ec11e,不要是ec11k)
+- [x] 旋钮盖
+- [x] pro micro ATmega32U4
+- [x] 凯华轴座58个
+- [x] pcb打板5
+- [x] 定位板和底板2
+- [x] **1N4148W** SOD123 package 58
+- [x] ssd1306 128*32 oled 2
+- [x] 音频端子 2
+- [x] 音频线 1
+- [x] 两脚轻触开关 2
+- [x] m2 6mm 铜柱 14个
+- [x] m2螺丝 28
+- [x] 防滑贴 1
+- [x] EC11编码器 2（最好是ec11e,不要是ec11k)
+- [x] 旋钮盖 2
+- [x] pro micro ATmega32U4 2
+- [x] 收货确认
+
+
+
+## 固件和编程
+
+![](https://secure2.wostatic.cn/static/6FEDHJ3mYGW4QDc96MMdon/image.png?auth_key=1767516045-kBjiNdh8QZE8dg9A3PpCHz-0-7b712f1ba8de1d624c0da4f1bf0f91a1)
+
+[qmk教程](https://www.wolai.com/vAcvf8xEfaBSCkAAbtppwz)
+
+1. 确保qmk的环境设置好
+2. 不要连接trrs音频线
+3. 将一半的键盘连接到电脑上面,flash固件,使用reset按钮
+4. 另外一半的键盘也要如此
+5. 断开usb连接，将两个键盘用trrs连接
+6. 用usb线连接左边的键盘
+7. **Enjoy!!!**
+
+## 时间表
+
+**2021.11.23-24**
+
+周二或周三物料和工具到齐
+
+**2021.11.24-12.1**
+
+焊接预计时间为一到两天，刷入固件
+
+**ddl暂定12月1日**
+
+### 日志
+
+2021/11/26
+
+问题：只有单一的板子工作，另外一块板子电源亮，指示灯亮，但是无法工作，oled屏幕显示乱码
+
+[Split Keyboard (qmk.fm)](https://docs.qmk.fm/#/feature_split_keyboard?id=required-hardware)
+
+![](https://secure2.wostatic.cn/static/bwYTwykGUCscfvqLQ2Vb4j/image.png?auth_key=1767516045-tyjAbaKDEMhQ7y3KEf4UJp-0-ac6813d9c76d4035e2ee847343444f1a)
+
+![](https://secure2.wostatic.cn/static/szAqURkx5pQRen7EHb3wi9/image.png?auth_key=1767516045-kEqKuUDGBHpDKqh5859kkm-0-8b4150d9cb37adc74652845cf613e77b)
+
+![](https://secure2.wostatic.cn/static/szAqURkx5pQRen7EHb3wi9/image.png?auth_key=1767516045-bVxsgk73tQrxDjc5Fw6f5m-0-8ced5b803c6282cf1b49aeaf3179a251)
+
+`avrdude-split-left`/`:avrdude-split-right`
+
+![](https://secure2.wostatic.cn/static/gt7p39ZenLsEiB6bch6ZDg/image.png?auth_key=1767516045-fN3zdtvwzPkf3ah3vvK1x1-0-1787d3ffbe9bdfd3a3d5ce66c7ee491f)
+
+2021.11.28
+
+严重大问题，两个板子无法通信，已知接线没有问题，单独拿杜邦线连接的时候也没用😩
+
+迷之解决办法:把一块板子的vcc和另外一块板子的gnd互连。</description><guid isPermaLink="true">https://huoyucat.github.io/post/fen-ti-jian-pan-diy.html</guid><pubDate>Sun, 04 Jan 2026 09:33:55 +0000</pubDate></item></channel></rss>
